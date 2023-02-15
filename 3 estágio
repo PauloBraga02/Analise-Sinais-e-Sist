@@ -1,0 +1,35 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Define a função X(z)
+def X(z):    
+    return z / (1 + z)
+
+# valores de z no plano complexo
+val_z = np.linspace(-2, 2, 1000)
+z_real, z_imag = np.meshgrid(val_z, val_z)
+z_complexo = z_real + 1j*z_imag
+
+#posição do polo
+polo = -1
+
+#gráfico do diagrama de polos e zeros
+fig1, ax1 = plt.subplots()
+ax1.scatter(0, 0, marker='o')
+ax1.scatter(polo.real, polo.imag, marker='x')
+ax1.set_xlabel('Real(z)')
+ax1.set_ylabel('Imag(z)')
+ax1.set_title('Diagrama de polos e zeros')
+ax1.grid()
+
+# transformada de Fourier
+valores_frequencia = np.linspace(-np.pi, np.pi, 1000)
+Xjw_valor = 1 / (1 + np.exp(-1j*valores_frequencia))
+fig2, ax2 = plt.subplots()
+ax2.plot(valores_frequencia, np.abs(Xjw_valor))
+ax2.set_xlabel('Frequência [rad]')
+ax2.set_ylabel('Magnitude')
+ax2.set_title('Transformada de Fourier')
+ax2.grid()
+
+plt.show()
